@@ -1,0 +1,142 @@
+#include <GL/glut.h>
+#include <GL/glu.h>
+#include <GL/gl.h>
+#include <windows.h>
+
+void Desenha(void)
+{
+	float x=0, y=0;int i,cont=0,cond=0;
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	glClear(GL_COLOR_BUFFER_BIT);
+	for(i = 1;i<=64;i++){
+		if((i%2!=0)&&(i!=(1+(cont*8))))//para fazer uma lógica para a formação dos quadrados em coordenada x
+			x=x+40;
+		if((i%2!=0)&&(cond==0)){//brancas quadrados pares
+			glColor3f(0.7098f,0.3961f,0.1137f);//marrom claro
+			glBegin(GL_QUADS);//quadrados marrom claro
+            glVertex2f(x,y);
+			glVertex2f(x,y+20.0);
+		    glVertex2f(x+20.0,y+20.0);
+			glVertex2f(x+20,y);
+			glEnd();
+		}
+		else if(cond==0){//pretas quadrados impares
+			glColor3f(0.5686f,0.3176f,0.0902f);//marrom escuro
+			glBegin(GL_QUADS);//quadrados marrom escuro
+			glVertex2f(x+20.0,y);
+			glVertex2f(x+20.0,y+20.0);
+			glVertex2f(x+40.0,y+20.0);
+			glVertex2f(x+40.0,y);
+			glEnd();
+		}
+		if((i%2!=0)&&(cond==1)){//brancas quadrados pares
+			glColor3f(0.5686f,0.3176f,0.0902f);//marrom escuro
+			glBegin(GL_QUADS);//quadrados marrom claro
+            glVertex2f(x,y);
+			glVertex2f(x,y+20.0);
+		    glVertex2f(x+20.0,y+20.0);
+			glVertex2f(x+20,y);
+			glEnd();
+		}
+		else if(cond==1){//pretas quadrados impares
+			glColor3f(0.7098f,0.3961f,0.1137f);//marrom claro
+			glBegin(GL_QUADS);//quadrados marrom escuro
+			glVertex2f(x+20.0,y);
+			glVertex2f(x+20.0,y+20.0);
+			glVertex2f(x+40.0,y+20.0);
+			glVertex2f(x+40.0,y);
+			glEnd();
+		}
+		if(i%8==0){
+			y=y+20;
+			x=0;
+			cont++;
+			if(cond==0)
+				cond=1;
+			else 
+				cond=0;
+		}
+	}
+	glColor3f(1.0f,1.0f,1.0f);
+	glBegin(GL_POLYGON);//base da torre
+	glVertex2f(5.0,144.0);
+	glVertex2f(5.0,146.0);
+	glVertex2f(8.0,148.0);
+	glVertex2f(12.0,148.0);
+	glVertex2f(15.0,146.0);
+	glVertex2f(15.0,144.0);
+	glEnd();
+	glBegin(GL_QUADS);//corpo da torre
+	glVertex2f(8.0,148.0);
+	glVertex2f(8.0,153.0);
+	glVertex2f(12.0,153.0);
+	glVertex2f(12.0,148.0);
+	glEnd();
+	glColor3f(0.0f,0.0f,0.0f);
+	glBegin(GL_QUADS);
+	glVertex2f(8.0,148.0);//barra preta separando a parte da base da parte do corpo da torre
+	glVertex2f(8.0,148.5);
+	glVertex2f(12.0,148.5);
+	glVertex2f(12.0,148.0);
+	//--------------------------
+	glVertex2f(8.0,153.0);//barra preta separando a cabeça do corpo da torre
+	glVertex2f(8.0,153.5);
+	glVertex2f(12.0,153.5);
+	glVertex2f(12.0,153.0);
+	glEnd();
+	glColor3f(1.0f,1.0f,1.0f);
+	glBegin(GL_POLYGON);
+	glVertex2f(8.0,153.5);//a base da cabeça da torre
+	glVertex2f(6.0,153.5);
+	glVertex2f(6.0,155.0);
+	glVertex2f(14.0,155.0);
+	glVertex2f(14.0,153.5);
+	glEnd();
+	glBegin(GL_QUADS);//o toquinho da esquerda
+	glVertex2f(6.0,155.0);
+	glVertex2f(6.0,156.5);
+	glVertex2f(7.5,156.5);
+	glVertex2f(7.5,155.0);
+	glEnd();
+	glBegin(GL_QUADS);//o toquinho da direita
+	glVertex2f(14.0,155.0);
+	glVertex2f(14.0,156.5);
+	glVertex2f(12.5,156.5);
+	glVertex2f(12.5,155.0);
+	glEnd();
+	glBegin(GL_QUADS);
+	glVertex2f(9.25,155.0);
+	glVertex2f(9.25,156.5);
+	glVertex2f(10.75,156.5);
+	glVertex2f(10.75,155.0);
+	glEnd();
+	glFlush();
+}
+void Inicializa(void){
+	glClearColor(0.0f,0.0f,0.0f,1.0f);
+}
+void AlteraTamanhoJanela(GLsizei w,GLsizei h){
+	//Especifica as dimensões da Viewport
+	glViewport(0,0,w,h); //largura e altura
+	//inicializa o sistema de coordenadas
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	//Estabelece a janela de seleção(left,right,botton,top)
+	if(w<=h)
+		gluOrtho2D(0.0f,160.0f,0.0f,160.0f*h/w);
+	else
+		gluOrtho2D(0.0f,160.0f*w/h,0.0f,160.0f); 
+}
+int main(void)
+{
+	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+	glutInitWindowSize(700,700);
+	glutInitWindowPosition(0,0);
+	glutCreateWindow("Xadrez Brabo");
+	glutDisplayFunc(Desenha);
+	glutReshapeFunc(AlteraTamanhoJanela);
+	Inicializa();
+	glutMainLoop();
+	return 1;
+}
