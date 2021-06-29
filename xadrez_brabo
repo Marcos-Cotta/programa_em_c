@@ -75,15 +75,38 @@ void Desenha(void)
 	glEnd();
 	glColor3f(0.0f,0.0f,0.0f);
 	glBegin(GL_QUADS);
-	glVertex2f(8.0,148.0);//barra preta separando a parte da base da parte do corpo da torre
+	glVertex2f(8.0,148.0);//barra preta separando a parte da base da parte do corpo da torre branca
 	glVertex2f(8.0,148.5);
 	glVertex2f(12.0,148.5);
 	glVertex2f(12.0,148.0);
-	//--------------------------
-	glVertex2f(8.0,153.0);//barra preta separando a cabeça do corpo da torre
+	//---------------------
+	glVertex2f(128.0,108.0);//barra preta separando a parte da base da parte do corpo do rei branco
+	glVertex2f(128.0,108.5);
+	glVertex2f(132.0,108.5);
+	glVertex2f(132.0,108.0);
+	//---------------------
+	glColor3f(1.0f,1.0f,1.0f);
+	glVertex2f(128.0,148.0);//barra branca separando a parte da base da parte do corpo do rei preto
+	glVertex2f(128.0,148.5);
+	glVertex2f(132.0,148.5);
+	glVertex2f(132.0,148.0);
+	//----------------------------------------
+	glColor3f(0.0f,0.0f,0.0f);
+	glVertex2f(8.0,153.0);//barra preta separando a cabeça do corpo da torre branca
 	glVertex2f(8.0,153.5);
 	glVertex2f(12.0,153.5);
 	glVertex2f(12.0,153.0);
+	//---------------------
+	glVertex2f(128.0,113.0);//barra preta separando a cabeça do corpo do rei branco
+	glVertex2f(128.0,113.5);
+	glVertex2f(132.0,113.5);
+	glVertex2f(132.0,113.0);
+	//---------------------
+	glColor3f(1.0f,1.0f,1.0f);
+	glVertex2f(128.0,153.0);//barra branca separando a cabeça do corpo do rei preto
+	glVertex2f(128.0,153.5);
+	glVertex2f(132.0,153.5);
+	glVertex2f(132.0,153.0);
 	glEnd();
 	glColor3f(1.0f,1.0f,1.0f);
 	glBegin(GL_POLYGON);
@@ -93,24 +116,75 @@ void Desenha(void)
 	glVertex2f(14.0,155.0);
 	glVertex2f(14.0,153.5);
 	glEnd();
-	glBegin(GL_QUADS);//o toquinho da esquerda
+	glBegin(GL_QUADS);//o toquinho da esquerda da torre
 	glVertex2f(6.0,155.0);
 	glVertex2f(6.0,156.5);
 	glVertex2f(7.5,156.5);
 	glVertex2f(7.5,155.0);
 	glEnd();
-	glBegin(GL_QUADS);//o toquinho da direita
+	glBegin(GL_QUADS);//o toquinho da direita da torre
 	glVertex2f(14.0,155.0);
 	glVertex2f(14.0,156.5);
 	glVertex2f(12.5,156.5);
 	glVertex2f(12.5,155.0);
 	glEnd();
-	glBegin(GL_QUADS);
+	glBegin(GL_QUADS);//o toquinho do meio da torre
 	glVertex2f(9.25,155.0);
 	glVertex2f(9.25,156.5);
 	glVertex2f(10.75,156.5);
 	glVertex2f(10.75,155.0);
 	glEnd();
+	glBegin(GL_POLYGON);//base do rei preto
+	glColor3f(0.0f,0.0f,0.0f);
+	glVertex2f(125.0,144.0);
+	glVertex2f(125.0,146.0);
+	glVertex2f(128.0,148.0);
+	glVertex2f(132.0,148.0);
+	glVertex2f(135.0,146.0);
+	glVertex2f(135.0,144.0);
+	glEnd();
+	glBegin(GL_QUADS);//corpo do rei preto
+	glVertex2f(128.0,148.5);
+	glVertex2f(128.0,153.0);
+	glVertex2f(132.0,153.0);
+	glVertex2f(132.0,148.5);
+
+	glVertex2f(129.5,153.5);//parte vertical da cruz do rei preto
+	glVertex2f(129.5,157.5);
+	glVertex2f(130.5,157.5);
+	glVertex2f(130.5,153.5);
+	
+	glVertex2f(128.0,155.5);//parte horizontal da cruz do rei preto
+	glVertex2f(128.0,156.5);
+	glVertex2f(132.0,156.5);
+	glVertex2f(132.0,155.5);
+	glEnd();
+	glBegin(GL_POLYGON);//base do rei branco
+	glColor3f(1.0f,1.0f,1.0f);
+	glVertex2f(125.0,104.0);
+	glVertex2f(125.0,106.0);
+	glVertex2f(128.0,108.0);
+	glVertex2f(132.0,108.0);
+	glVertex2f(135.0,106.0);
+	glVertex2f(135.0,104.0);
+	glEnd();
+	glBegin(GL_QUADS);//corpo do rei branco
+	glVertex2f(128.0,108.5);
+	glVertex2f(128.0,113.0);
+	glVertex2f(132.0,113.0);
+	glVertex2f(132.0,108.5);
+	
+	glVertex2f(129.5,113.5);//parte vertical da cruz do rei branco
+	glVertex2f(129.5,117.5);
+	glVertex2f(130.5,117.5);
+	glVertex2f(130.5,113.5);
+	
+	glVertex2f(128.0,115.5);//parte horizontal da cruz do rei branco
+	glVertex2f(128.0,116.5);
+	glVertex2f(132.0,116.5);
+	glVertex2f(132.0,115.5);
+	glEnd();
+	
 	glFlush();
 }
 void Inicializa(void){
